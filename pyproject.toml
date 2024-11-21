@@ -1,0 +1,28 @@
+[tool.ruff]
+line-length = 100
+target-version = 'py312'
+
+[tool.mypy]
+files = '**/*.py'
+
+[tool.poetry]
+name = "django-history-example"
+version = "0.1.0"
+description = ""
+authors = ["i.AI <i-dot-ai-enquiries@cabinetoffice.gov.uk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.3"
+
+[tool.poetry.group.development.dependencies]
+ruff = "^0.4.4"
+pre-commit = "^3.7.1"
+mypy = "^1.10.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
