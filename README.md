@@ -28,6 +28,6 @@ Copy the `.env.example` template file and rename it `.env`. This is where you ca
 poetry run python manage.py runserver
 ```
 
-## Running tests
-Tests use `pytest` - run `make test` to run all of them [NO TESTS YET!].
+Uses SQLite [TODO - more instructions to come!]
+
 
