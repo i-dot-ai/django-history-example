@@ -6,22 +6,23 @@ target-version = 'py312'
 files = '**/*.py'
 
 [tool.poetry]
-name = "django-history-example"
+name = "consult"
 version = "0.1.0"
 description = ""
 authors = ["i.AI <i-dot-ai-enquiries@cabinetoffice.gov.uk>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.12.3"
+python = ">=3.12"
+django = ">=5.0"
 
 [tool.poetry.group.development.dependencies]
-ruff = "^0.4.4"
-pre-commit = "^3.7.1"
-mypy = "^1.10.0"
+ruff = ">=0.4.4"
+pre-commit = ">=3.7.1"
+mypy = ">=1.10.0"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.2.1"
+pytest = ">=8.2.1"
 
 [build-system]
 requires = ["poetry-core"]

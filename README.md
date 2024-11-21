@@ -12,7 +12,7 @@ This project uses:
 - `ruff` for linting and formatting (https://docs.astral.sh/ruff/)
 - `mypy` for checking type hints (https://mypy.readthedocs.io/en/stable/)
 
-Make sure you have Python 3.12, `poetry` and `precommit` installed on your laptop. Then run `poetry install` to install relevenat packages.
+Make sure you have Python >= 3.12, `poetry` and `precommit` installed on your laptop. Then run `poetry install` to install relevant packages.
 
 For linting and formatting: `make check-python-code` and `make format-python-code`. See the `Makefile` for more details (`make help`).
 
@@ -22,8 +22,11 @@ For linting and formatting: `make check-python-code` and `make format-python-cod
 Copy the `.env.example` template file and rename it `.env`. This is where you can add your local environment variables - do not commit this file (it is in the `.gitignore`). [NO ENV VARIABLES YET!]
 
 
-## How to run the code/app
+## How to run the app
 
+```
+poetry run python manage.py runserver
+```
 
 ## Running tests
 Tests use `pytest` - run `make test` to run all of them [NO TESTS YET!].
