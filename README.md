@@ -2,6 +2,8 @@
 
 ## About this project
 
+This is an example project to test the functionality of `django-simple-history`.
+
 ## Setup
 
 This project uses:
@@ -17,12 +19,12 @@ For linting and formatting: `make check-python-code` and `make format-python-cod
 
 ## Environment variables
 
-Copy the `.env.example` template file and rename it `.env`. This is where you can add your local environment variables - do not commit this file (it is in the `.gitignore`).
+Copy the `.env.example` template file and rename it `.env`. This is where you can add your local environment variables - do not commit this file (it is in the `.gitignore`). [NO ENV VARIABLES YET!]
 
 
 ## How to run the code/app
 
 
 ## Running tests
-Tests use `pyetest` - run `make test` to run all of them.
+Tests use `pytest` - run `make test` to run all of them [NO TESTS YET!].
 
