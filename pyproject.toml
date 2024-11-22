@@ -16,6 +16,8 @@ readme = "README.md"
 python = ">=3.12"
 django = ">=5.0"
 django-simple-history = "^3.7.0"
+faker = "^33.0.0"
+factory-boy = "^3.3.1"
 
 [tool.poetry.group.development.dependencies]
 ruff = ">=0.4.4"
