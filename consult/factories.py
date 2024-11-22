@@ -1,4 +1,4 @@
-from factory import DjangoModelFactory, SubFactory
+import factory
 from faker import Faker
 
 from consult.accounts.models import User
@@ -7,29 +7,28 @@ from consult.consultations.models import Execution, Theme
 fake = Faker()
 
 
-class UserFactory(DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
 
-    username = fake.user_name()
-    email = fake.email()
-    username = fake.user_name()
-    email = fake.email()
+    username = factory.LazyAttribute(lambda _: fake.user_name())
+    email = factory.LazyAttribute(lambda _: fake.email())
 
 
-class ExecutionFactory(DjangoModelFactory):
+class ExecutionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Execution
 
-    type_choices = [choice[0] for choice in Execution.TYPE_CHOICES]
-    type = fake.random_element(elements=type_choices)
-    description = fake.sentence()
+    type = factory.LazyAttribute(
+        lambda _: fake.random_element(elements=[choice[0] for choice in Execution.Type.choices])
+    )
+    description = factory.LazyAttribute(lambda _: fake.sentence())
 
 
-class ThemeFactory(DjangoModelFactory):
+class ThemeFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Theme
 
-    name = fake.word()
-    description = fake.sentence()
-    execution = SubFactory(ExecutionFactory)
+    name = factory.LazyAttribute(lambda _: fake.word())
+    description = factory.LazyAttribute(lambda _: fake.sentence())
+    execution = factory.SubFactory(ExecutionFactory)

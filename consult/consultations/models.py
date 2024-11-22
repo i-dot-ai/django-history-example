@@ -19,13 +19,13 @@ class TimeStampedModel(models.Model):
 
 
 class Execution(TimeStampedModel, UUIDPrimaryKeyModel):
-    TYPE_CHOICES = [
-        ("sentiment", "Sentiment"),
-        ("theme_generation", "Theme Generation"),
-        ("theme_mapping", "Theme Mapping"),
-        ("other", "Other"),
-    ]
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    class Type(models.TextChoices):
+        SENTIMENT = "sentiment", "Sentiment"
+        THEME_GENERATION = "theme_generation", "Theme Generation"
+        THEME_MAPPING = "theme_mapping", "Theme Mapping"
+        OTHER = "other", "Other"
+
+    type = models.CharField(max_length=20, choices=Type)
     description = models.TextField()
 
 
