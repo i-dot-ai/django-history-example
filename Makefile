@@ -17,3 +17,9 @@ format-python-code: ## Format Python code including sorting imports
 	poetry run ruff check --select I . --fix
 	poetry run ruff check . --fix
 	poetry run ruff format .
+
+
+.PHONY: run
+run:
+	poetry run python manage.py runserver
+
