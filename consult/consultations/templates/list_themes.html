@@ -22,7 +22,7 @@
   <h1>Themes</h1>
   <ul>
     {% for theme in themes %}
-    <li>{{ theme.name }} : {{ theme.id }}</li>
+    <li><a href="{% url 'edit_theme' theme.id %}"></a>{{ theme.name }} : {{ theme.id }}</li>
     {% endfor %}
   </ul>
 </body>
