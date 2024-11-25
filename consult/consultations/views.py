@@ -46,7 +46,9 @@ def edit_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
     else:
         form = ThemeForm(instance=theme)
 
-    return render(request, "edit_theme.html", {"form": form, "theme": theme, "theme_history": theme_history})
+    return render(
+        request, "edit_theme.html", {"form": form, "theme": theme, "theme_history": theme_history}
+    )
 
 
 def delete_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
