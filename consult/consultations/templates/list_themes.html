@@ -8,23 +8,38 @@
 </head>
 
 <body>
-  <h1>Select execution run</h1>
+  <h1>Execution run: {{ selected_execution_run_id }}</h1>
   <form method="post">
     {% csrf_token %}
     <select id="execution-run" name="execution-run">
       {% for run in all_execution_runs %}
-      <option value="{{ run.id }}">Description: {{ run.description }} : {{ run.created_at|date:"Y-m-d H:i:s" }}</option>
+      <option value="{{ run.id }}">Description: {{ run.description }} : {{ run.created_at|date:"Y-m-d H:i:s" }} : {{ run.id }}</option>
       {% endfor %}
     </select>
     <button type="submit">Submit</button>
   </form>
 
-  <h1>Themes</h1>
+  <h2>Themes</h2>
   <ul>
     {% for theme in themes %}
-    <li><a href="{% url 'edit_theme' theme.id %}"></a>{{ theme.name }} : {{ theme.id }}</li>
+    <li>
+      <a href="{% url 'edit_theme' theme.id %}">{{ theme.name }} : {{ theme.id }}</a>
+      <form action="{% url 'delete_theme' theme.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+      </form>
+    </li>
     {% endfor %}
   </ul>
+
+  <h2>Create theme for selected execution ID: {{ selected_execution_run_id }}</h2>
+    <form action="{% url 'create_theme' selected_execution_run_id %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="execution-run-id" id="selected-execution-run-id">
+      <button type="submit">Create theme</button>
+    </form>
 </body>
 
+
 </html>
+
