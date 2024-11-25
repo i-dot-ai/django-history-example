@@ -4,6 +4,9 @@
 
 This is an example project to test the functionality of `django-simple-history`.
 
+This uses Django with a SQLite database (for simplicity).
+
+
 ## Setup
 
 This project uses:
@@ -16,18 +19,22 @@ Make sure you have Python >= 3.12, `poetry` and `precommit` installed on your la
 
 For linting and formatting: `make check-python-code` and `make format-python-code`. See the `Makefile` for more details (`make help`).
 
+### Setting up the app
 
-## Environment variables
+Clone the repo.
+Run the migrations (which will create your SQLite database): `poetry run python manage.py migrate`.
+Run the app: `make run`.
+Go to http://localhost:8000 in the browser.
 
-Copy the `.env.example` template file and rename it `.env`. This is where you can add your local environment variables - do not commit this file (it is in the `.gitignore`). [NO ENV VARIABLES YET!]
+
+## Populating the app with dummy data
+
+There is a management command to populate the database with dummy data: `poetry run python manage.py generate_dummy_data`.
 
 
-## How to run the app
+## Running the app
 
-```
-poetry run python manage.py runserver
-```
+If you make database changes you will need to make migrations (`poetry run python manage.py makemigrations`) and run migrations (`poetry run python manage.py migrate`).
 
-Uses SQLite [TODO - more instructions to come!]
-
+Then `make run` to run the app and go to http://localhost:8000 in the browser.
 
