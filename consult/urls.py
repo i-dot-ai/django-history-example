@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from consult.accounts.views import homepage
 from consult.consultations.views import list_themes_for_execution_run, edit_theme, delete_theme, create_theme
@@ -33,4 +33,8 @@ urlpatterns = [
     path("theme/<uuid:theme_id>/", edit_theme, name="edit_theme"),
     path("delete-theme/<uuid:theme_id>/", delete_theme, name="delete_theme"),
     path("create-theme/<uuid:execution_id>/", create_theme, name="create_theme"),
+]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
