@@ -5,8 +5,8 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .models import Execution, Theme
 from .forms import ThemeForm
+from .models import Execution, Theme
 
 
 def list_themes_for_execution_run(
