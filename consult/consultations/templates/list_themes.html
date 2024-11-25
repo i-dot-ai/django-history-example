@@ -19,7 +19,7 @@
     <button type="submit">Submit</button>
   </form>
 
-  <h2>Themes</h2>
+  <h2>Themes (current)</h2>
   <ul>
     {% for theme in themes %}
     <li>
@@ -38,7 +38,23 @@
       <input type="hidden" name="execution-run-id" id="selected-execution-run-id">
       <button type="submit">Create theme</button>
     </form>
+
+  <h2>Initial state of themes using history</h2>
+    <ul>
+      {% for theme in initial_themes_history %}
+      <li>
+        {{ theme.name }} : {{ theme.id }} : {{ theme.history_date|date:"Y-m-d H:i:s" }}
+      </li>
+      {% endfor %}
+    </ul>
+
+
+
 </body>
+
+
+
+
 
 
 </html>

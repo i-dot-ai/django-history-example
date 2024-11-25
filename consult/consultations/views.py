@@ -21,6 +21,7 @@ def list_themes_for_execution_run(
     else:
         selected_execution = Execution.objects.first()  # pick the first as default
     themes = Theme.objects.filter(execution=selected_execution)
+    initial_themes_history = selected_execution.get_initial_themes_for_execution()
     return render(
         request,
         "list_themes.html",
@@ -28,12 +29,14 @@ def list_themes_for_execution_run(
             "selected_execution": selected_execution,
             "themes": themes,
             "all_execution_runs": all_execution_runs,
+            "initial_themes_history": initial_themes_history,
         },
     )
 
 
 def edit_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
     theme = Theme.objects.get(id=theme_id)
+    theme_history = theme.history.all()
 
     if request.method == "POST":
         form = ThemeForm(request.POST, instance=theme)
@@ -43,7 +46,7 @@ def edit_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
     else:
         form = ThemeForm(instance=theme)
 
-    return render(request, "edit_theme.html", {"form": form, "theme": theme})
+    return render(request, "edit_theme.html", {"form": form, "theme": theme, "theme_history": theme_history})
 
 
 def delete_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:

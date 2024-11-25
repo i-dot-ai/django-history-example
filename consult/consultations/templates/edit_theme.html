@@ -13,6 +13,16 @@
     <button type="submit">Save</button>
   </form>
   <a href="{% url 'list_themes' %}">Back to execution runs</a>
+
+
+  <h2>History of theme</h2>
+    {% for history in theme_history %}
+      <p>
+        {{ history.name }} : {{ history.description }} : {{ history.history_date|date:"Y-m-d H:i:s" }}
+        User: {{ history.history_user }}
+      </p>
+    {% endfor %}
+
 </body>
 
 </html>
