@@ -16,14 +16,16 @@ def list_themes_for_execution_run(
         execution_id = request.POST.get("execution-run")
         return redirect(reverse("list_themes_for_execution", args=(execution_id,)))
     all_execution_runs = Execution.objects.all()
-    if not execution_id:
-        execution_id = Execution.objects.first().id  # pick the first as default
-    themes = Theme.objects.filter(execution__id=execution_id)
+    if execution_id:
+        selected_execution = Execution.objects.get(id=execution_id)
+    else:
+        selected_execution = Execution.objects.first()  # pick the first as default
+    themes = Theme.objects.filter(execution=selected_execution)
     return render(
         request,
         "list_themes.html",
         {
-            "selected_execution_run_id": execution_id,
+            "selected_execution": selected_execution,
             "themes": themes,
             "all_execution_runs": all_execution_runs,
         },

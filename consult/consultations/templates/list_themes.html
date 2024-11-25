@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <h1>Execution run: {{ selected_execution_run_id }}</h1>
+  <h1>Execution run: {{ selected_execution.id }}</h1>
   <form method="post">
     {% csrf_token %}
     <select id="execution-run" name="execution-run">
@@ -32,8 +32,8 @@
     {% endfor %}
   </ul>
 
-  <h2>Create theme for selected execution ID: {{ selected_execution_run_id }}</h2>
-    <form action="{% url 'create_theme' selected_execution_run_id %}" method="post">
+  <h2>Create theme for selected execution ID: {{ selected_execution.id }}</h2>
+    <form action="{% url 'create_theme' selected_execution.id %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="execution-run-id" id="selected-execution-run-id">
       <button type="submit">Create theme</button>
