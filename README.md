@@ -37,6 +37,7 @@ There is a management command to populate the database with dummy data: `poetry 
 
 
 ## Creating users
+
 Create a superuser using `poetry run python manage.py createsuperuser`.
 
 Create a regular user in the shell.
