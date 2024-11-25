@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit theme</title>
+</head>
+
+<body>
+  <h1>Edit theme</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'list_themes' %}">Back to execution runs</a>
+</body>
+
+</html>

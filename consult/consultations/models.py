@@ -35,3 +35,4 @@ class Theme(TimeStampedModel, UUIDPrimaryKeyModel):
     execution = models.ForeignKey(Execution, on_delete=models.CASCADE)
 
     history = HistoricalRecords()
+

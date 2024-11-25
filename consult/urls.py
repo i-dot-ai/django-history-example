@@ -18,6 +18,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from consult.accounts.views import homepage
+from consult.consultations.views import list_themes_for_execution_run, edit_theme
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", homepage, name="homepage"),
+    path(
+        "execution/<uuid:execution_id>/",
+        list_themes_for_execution_run,
+        name="list_themes_for_execution",
+    ),
+    path("execution/", list_themes_for_execution_run, name="list_themes"),
+    path("theme/<uuid:theme_id>/", edit_theme, name="edit_theme"),
 ]
