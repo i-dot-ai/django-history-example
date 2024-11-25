@@ -21,15 +21,25 @@ For linting and formatting: `make check-python-code` and `make format-python-cod
 
 ### Setting up the app
 
-Clone the repo.
-Run the migrations (which will create your SQLite database): `poetry run python manage.py migrate`.
-Run the app: `make run`.
-Go to http://localhost:8000 in the browser.
+1. Clone the repo.
+2. Run the migrations (which will create your SQLite database): `poetry run python manage.py migrate`.
+3. Run the app: `make run`.
+4. Go to http://localhost:8000 in the browser.
+
+### Exploring the data
+
+Explore in the shell: `poetry run python manage.py shell`.
 
 
 ## Populating the app with dummy data
 
 There is a management command to populate the database with dummy data: `poetry run python manage.py generate_dummy_data`.
+
+
+## Creating users
+Create a superuser using `poetry run python manage.py createsuperuser`.
+
+Create a regular user in the shell.
 
 
 ## Running the app
