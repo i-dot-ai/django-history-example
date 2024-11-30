@@ -25,6 +25,8 @@ from consult.consultations.views import (
     edit_theme,
     list_themes_for_execution_run,
 )
+from consult.api import api
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -38,6 +40,7 @@ urlpatterns = [
     path("theme/<uuid:theme_id>/", edit_theme, name="edit_theme"),
     path("delete-theme/<uuid:theme_id>/", delete_theme, name="delete_theme"),
     path("create-theme/<uuid:execution_id>/", create_theme, name="create_theme"),
+    path("api/", api.urls),
 ]
 
 urlpatterns += [
