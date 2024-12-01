@@ -19,14 +19,13 @@ from django.contrib import admin
 from django.urls import include, path
 
 from consult.accounts.views import homepage
+from consult.api import api
 from consult.consultations.views import (
     create_theme,
     delete_theme,
     edit_theme,
     list_themes_for_execution_run,
 )
-from consult.api import api
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
