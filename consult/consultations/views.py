@@ -1,5 +1,5 @@
 from typing import Optional
-from uuid import uuid4
+from uuid import UUID
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
@@ -10,7 +10,7 @@ from .models import Execution, Theme
 
 
 def list_themes_for_execution_run(
-    request: HttpRequest, execution_id: Optional[uuid4] = None
+    request: HttpRequest, execution_id: Optional[UUID] = None
 ) -> HttpResponse:
     if request.POST:
         execution_id = request.POST.get("execution-run")
@@ -34,7 +34,7 @@ def list_themes_for_execution_run(
     )
 
 
-def edit_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
+def edit_theme(request: HttpRequest, theme_id: UUID) -> HttpResponse:
     theme = Theme.objects.get(id=theme_id)
     theme_history = theme.history.all()
 
@@ -51,7 +51,7 @@ def edit_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
     )
 
 
-def delete_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
+def delete_theme(request: HttpRequest, theme_id: UUID) -> HttpResponse:
     if request.method == "POST":
         theme = Theme.objects.get(id=theme_id)
         theme.delete()
@@ -59,7 +59,7 @@ def delete_theme(request: HttpRequest, theme_id: uuid4) -> HttpResponse:
     return HttpResponse(status=405)  # Method not allowed
 
 
-def create_theme(request: HttpRequest, execution_id: uuid4) -> HttpResponse:
+def create_theme(request: HttpRequest, execution_id: UUID) -> HttpResponse:
     if request.method == "POST":
         form = ThemeForm(request.POST)
         if form.is_valid():
