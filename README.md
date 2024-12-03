@@ -40,13 +40,13 @@ There is a management command to populate the database with dummy data: `poetry 
 
 Create a superuser using `poetry run python manage.py createsuperuser`.
 
-Create a regular user in the shell.
+Create a regular user in the shell. To access the Django shell: `poetry run python manage.py shell`.
 
 
 ## Running the app
 
 If you make database changes you will need to make migrations (`poetry run python manage.py makemigrations`) and run migrations (`poetry run python manage.py migrate`).
 
-Then `make run` to run the app and go to http://localhost:8000 in the browser.
+Then `make run` to run the app and go to http://localhost:8000 in the browser. You will need to create a superuser to login.
 
 Go to http://localhost:8000/api/docs to see the API docs.
