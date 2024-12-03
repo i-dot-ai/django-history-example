@@ -49,3 +49,4 @@ If you make database changes you will need to make migrations (`poetry run pytho
 
 Then `make run` to run the app and go to http://localhost:8000 in the browser.
 
+Go to http://localhost:8000/api/docs to see the API docs.
