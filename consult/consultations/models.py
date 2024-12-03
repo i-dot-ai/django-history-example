@@ -11,14 +11,7 @@ class UUIDPrimaryKeyModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
-class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        abstract = True
-
-
-class Execution(TimeStampedModel, UUIDPrimaryKeyModel):
+class Execution(UUIDPrimaryKeyModel):
     class Type(models.TextChoices):
         SENTIMENT = "sentiment", "Sentiment"
         THEME_GENERATION = "theme_generation", "Theme Generation"
@@ -27,6 +20,7 @@ class Execution(TimeStampedModel, UUIDPrimaryKeyModel):
 
     type = models.CharField(max_length=20, choices=Type)
     description = models.TextField()
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     def get_initial_themes_for_execution(self):
         all_created_themes = Theme.history.filter(execution=self, history_type="+")
@@ -35,9 +29,10 @@ class Execution(TimeStampedModel, UUIDPrimaryKeyModel):
         return themes_not_created_by_user
 
 
-class Theme(TimeStampedModel, UUIDPrimaryKeyModel):
+class Theme(UUIDPrimaryKeyModel):
     name = models.CharField(max_length=100)
     description = models.TextField()
     execution = models.ForeignKey(Execution, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     history = HistoricalRecords()
