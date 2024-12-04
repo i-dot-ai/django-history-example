@@ -30,6 +30,7 @@ from consult.consultations.views import (
     show_all_frameworks,
     show_framework,
     show_framework_theme,
+    run_generate_mapping
 )
 
 urlpatterns = [
@@ -58,7 +59,7 @@ urlpatterns = [
     path("framework/<int:framework_id>/", show_framework, name="show_framework"),
     # Run parts of the pipeline
     path("generate-framework/", run_generate_framework, name="generate_framework"),
-    path("generate-mapping/", run_generate_framework, name="generate_mapping"),
+    path("generate-mapping/", run_generate_mapping, name="generate_mapping"),
     # API
     path("api/", api.urls),
 ]

@@ -10,6 +10,8 @@ from .models import Execution, FrameworkTheme, Theme, Response
 from .pipeline import generate_dummy_framework, generate_mapping
 
 
+# Excecution & theme views - now superseded by FrameworkTheme approach
+
 def list_themes_for_execution_run(
     request: HttpRequest, execution_id: Optional[UUID] = None
 ) -> HttpResponse:
@@ -74,6 +76,10 @@ def create_theme(request: HttpRequest, execution_id: UUID) -> HttpResponse:
     return render(request, "create_theme.html", {"form": form, "execution_id": execution_id})
 
 
+# FrameworkTheme views
+# Each row of the FrameworkTheme table is a theme belonging to a particular framework.
+# Changes to the theme will be recorded with a new framework_id.
+
 def edit_themes_for_framework(
     request: HttpRequest, framework_id: Optional[UUID] = None
 ) -> HttpResponse:
@@ -117,6 +123,18 @@ def show_all_frameworks(request: HttpRequest) -> HttpResponse:
     return render(request, "show_all_frameworks.html", {"all_frameworks": all_frameworks})
 
 
+def show_framework_theme(request, framework_theme_id: UUID) -> HttpResponse:
+    framework_theme = FrameworkTheme.objects.get(id=framework_theme_id)
+    history = framework_theme.get_theme_history()
+    return render(
+        request,
+        "show_framework_theme.html",
+        {"framework_theme": framework_theme, "history": history},
+    )
+
+
+# Pipeline views
+
 def run_generate_framework(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         framework_id = generate_dummy_framework()
@@ -132,13 +150,3 @@ def run_generate_mapping(request: HttpRequest) -> HttpResponse:
         generate_mapping(responses, framework_id)
         # TODO - what to return
     return render(request, "run_generate_mapping.html", {"framework_ids": framework_ids})
-
-
-def show_framework_theme(request, framework_theme_id: UUID) -> HttpResponse:
-    framework_theme = FrameworkTheme.objects.get(id=framework_theme_id)
-    history = framework_theme.get_theme_history()
-    return render(
-        request,
-        "show_framework_theme.html",
-        {"framework_theme": framework_theme, "history": history},
-    )
