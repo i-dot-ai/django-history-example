@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme</title>
+</head>
+
+<body>
+  <h1>Theme</h1>
+  <p>
+    Theme name: {{ framework_theme.name }}
+    Theme description: {{ framework_theme.description }}
+
+    Framework ID: {{ framework_theme.framework_id }}
+    Created at: {{ framework_theme.created_at | date: "Y-m-d : HH:MM" }}
+
+    User: {{ framework_theme.user.username }}
+  </p>
+
+  <h2>History</h2>
+  {% for old_framework_theme in history %}
+
+    <h3>Theme name: {{ old_framework_theme.name }}</h3>
+      <p>
+      Theme description: {{ old_framework_theme.description }}
+      Framework ID: {{ old_framework_theme.framework_id }}
+      Created at: {{ old_framework_theme.created_at | date: "Y-m-d : HH:MM" }}
+      User: {{ old_framework_theme.user.username }}
+      </p>
+
+  {% endfor}
+
+
+</body>
+
+</html>
+

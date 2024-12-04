@@ -33,7 +33,8 @@ Explore in the shell: `poetry run python manage.py shell`.
 
 ## Populating the app with dummy data
 
-There is a management command to populate the database with dummy data: `poetry run python manage.py generate_dummy_data`.
+There is a management command to populate the database with dummy data on responses and users: `poetry run python manage.py generate_dummy_users_responses`.
+
 
 
 ## Creating users

@@ -122,3 +122,13 @@ def run_generate_framework(request: HttpRequest) -> HttpResponse:
         framework_id = generate_dummy_framework()
         return redirect(reverse("show_framework", args=(framework_id,)))
     return render(request, "run_generate_framework.html")
+
+
+def show_framework_theme(request, framework_theme_id: UUID) -> HttpResponse:
+    framework_theme = FrameworkTheme.objects.get(id=framework_theme_id)
+    history = framework_theme.get_theme_history()
+    return render(
+        request,
+        "show_framework_theme.html",
+        {"framework_theme": framework_theme, "history": history},
+    )

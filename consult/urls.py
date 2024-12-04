@@ -29,6 +29,7 @@ from consult.consultations.views import (
     run_generate_framework,
     show_all_frameworks,
     show_framework,
+    show_framework_theme,
 )
 
 urlpatterns = [
@@ -49,7 +50,8 @@ urlpatterns = [
         edit_themes_for_framework,
         name="edit_theme_for_framework",
     ),
-    path("frameworks/", show_all_frameworks, name="show_all_frameworks"),
+    path("theme-framework/<uuid:id>/", show_framework_theme, name="theme-framework"),
+    path("all-frameworks/", show_all_frameworks, name="show_all_frameworks"),
     path("framework/<int:framework_id>/", show_framework, name="show_framework"),
     path("generate-framework/", run_generate_framework, name="generate_framework"),
     path("api/", api.urls),

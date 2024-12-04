@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from simple_history.models import HistoricalRecords
 
+# For now, let's assume we have one consultation and one question
+
 
 class UUIDPrimaryKeyModel(models.Model):
     class Meta:
@@ -36,6 +38,11 @@ class Theme(UUIDPrimaryKeyModel):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     history = HistoricalRecords()
+
+
+class Response(UUIDPrimaryKeyModel):
+    response = models.TextField()
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
 
 class FrameworkTheme(UUIDPrimaryKeyModel):
