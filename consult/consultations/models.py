@@ -67,3 +67,11 @@ class FrameworkTheme(UUIDPrimaryKeyModel):
             parents.append(current.parent)
             current = current.parent
         return parents
+
+
+class ResponseMapping(UUIDPrimaryKeyModel):
+    response = models.ForeignKey(Response, on_delete=models.CASCADE)
+    framework_theme = models.ForeignKey(FrameworkTheme, on_delete=models.CASCADE)
+
+    history = HistoricalRecords()
+
