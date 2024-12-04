@@ -175,3 +175,16 @@ def show_all_response_mappings(request: HttpRequest) -> HttpResponse:
     return render(
         request, "show_all_response_mappings.html", {"response_mappings": response_mappings}
     )
+
+
+# Homepage
+def homepage(request):
+    framework_themes_ids = FrameworkTheme.objects.all().values_list("id", flat=True)
+    framework_ids = FrameworkTheme.objects.all().values_list("framework_id", flat=True)
+    response_mapping_ids = ResponseMapping.objects.all().values_list("id", flat=True)
+    context = {
+        "framework_theme_ids": framework_themes_ids,
+        "framework_ids": framework_ids,
+        "response_mapping_ids": response_mapping_ids,
+    }
+    return render(request, "homepage.html", context=context)

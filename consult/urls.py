@@ -18,13 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from consult.accounts.views import homepage
 from consult.api import api
 from consult.consultations.views import (
     create_theme,
     delete_theme,
     edit_theme,
     edit_themes_for_framework,
+    homepage,
     list_themes_for_execution_run,
     run_generate_framework,
     run_generate_mapping,
@@ -50,6 +50,7 @@ urlpatterns = [
     path("create-theme/<uuid:execution_id>/", create_theme, name="create_theme"),
     # Frameworks & themes - each theme generated will be a FrameworkTheme.
     # A "Framework" is a collection of themes - framework_id says which framework it is.
+    path("all-frameworks/", show_all_frameworks, name="show_all_frameworks"),
     path("create-themes-framework/", edit_themes_for_framework, name="create_theme_for_framework"),
     path(
         "edit-themes-framework/<int:framework_id>/",
@@ -57,7 +58,6 @@ urlpatterns = [
         name="edit_theme_for_framework",
     ),
     path("theme-framework/<uuid:id>/", show_framework_theme, name="theme-framework"),
-    path("all-frameworks/", show_all_frameworks, name="show_all_frameworks"),
     path("framework/<int:framework_id>/", show_framework, name="show_framework"),
     # Run parts of the pipeline
     path("generate-framework/", run_generate_framework, name="generate_framework"),
