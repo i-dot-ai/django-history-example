@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit themes for framework</title>
+</head>
+
+<body>
+  <h1>Edit themes</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create new framework</button>
+  </form>
+  <a href="{% url 'homepage' %}">Back to homepage</a>
+
+
+  <h2>Framework table</h2>
+    {% for framework in all_frameworks %}
+      <p>
+        Framework ID {{framework_id}} : {{ framework.name }} : {{ framework.description }}
+      </p>
+    {% endfor %}
+
+</body>
+
+</html>

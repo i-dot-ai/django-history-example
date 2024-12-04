@@ -5,8 +5,8 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .forms import ThemeForm
-from .models import Execution, Theme
+from .forms import ThemeForm, FrameworkFormSet, FrameworkForm
+from .models import Execution, Theme, Framework
 
 
 def list_themes_for_execution_run(
@@ -71,3 +71,30 @@ def create_theme(request: HttpRequest, execution_id: UUID) -> HttpResponse:
         form = ThemeForm()
 
     return render(request, "create_theme.html", {"form": form, "execution_id": execution_id})
+
+
+def edit_themes_for_framework(request: HttpRequest, framework_id: Optional[UUID] = None) -> HttpResponse:
+    all_frameworks = Framework.objects.all().order_by("framework_id")
+    next_id = Framework.get_next_framework_id()
+    print(f"next_id: {next_id}")
+    if request.method == "POST":
+        formset = FrameworkFormSet(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                form.instance.pk = None  # Set primary key to None to create new objects
+                print(f"form.instance: {form.instance}")
+                framework = form.save(commit=False)
+                framework.framework_id = next_id
+                framework.save()
+            return redirect(reverse("edit_theme_for_framework", args=(next_id,)))
+    else:
+        if framework_id:
+            formset = FrameworkFormSet(queryset=Framework.objects.filter(framework_id=framework_id))
+        else:
+            formset = FrameworkFormSet()
+    return render(request, "edit_framework_themes.html", {"form": formset, "framework_id": framework_id, "all_frameworks": all_frameworks})
+
+
+def show_framework(request: HttpRequest, framework_id: id) -> HttpResponse:
+    frameworks = Framework.objects.get(framework_id=framework_id)
+    return render(request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id})

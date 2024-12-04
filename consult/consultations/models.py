@@ -36,3 +36,16 @@ class Theme(UUIDPrimaryKeyModel):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     history = HistoricalRecords()
+
+
+class Framework(UUIDPrimaryKeyModel):
+    """A framework_id groups a bunch of themes that will be used for mapping."""
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    framework_id = models.IntegerField() # Is this the right name?
+
+    @classmethod
+    def get_next_framework_id(cls):
+        last_framework = cls.objects.all().order_by('framework_id').last()
+        return last_framework.framework_id + 1 if last_framework else 1
