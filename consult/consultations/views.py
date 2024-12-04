@@ -96,5 +96,5 @@ def edit_themes_for_framework(request: HttpRequest, framework_id: Optional[UUID]
 
 
 def show_framework(request: HttpRequest, framework_id: id) -> HttpResponse:
-    frameworks = Framework.objects.get(framework_id=framework_id)
+    frameworks = Framework.objects.filter(framework_id=framework_id)
     return render(request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id})
