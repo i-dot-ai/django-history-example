@@ -5,8 +5,8 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .forms import ThemeForm, FrameworkFormSet, FrameworkForm
-from .models import Execution, Theme, Framework
+from .forms import FrameworkFormSet, ThemeForm
+from .models import Execution, Framework, Theme
 from .pipeline import generate_dummy_framework
 
 
@@ -74,7 +74,9 @@ def create_theme(request: HttpRequest, execution_id: UUID) -> HttpResponse:
     return render(request, "create_theme.html", {"form": form, "execution_id": execution_id})
 
 
-def edit_themes_for_framework(request: HttpRequest, framework_id: Optional[UUID] = None) -> HttpResponse:
+def edit_themes_for_framework(
+    request: HttpRequest, framework_id: Optional[UUID] = None
+) -> HttpResponse:
     all_frameworks = Framework.objects.all().order_by("framework_id")
     next_id = Framework.get_next_framework_id()
     print(f"next_id: {next_id}")
@@ -93,12 +95,23 @@ def edit_themes_for_framework(request: HttpRequest, framework_id: Optional[UUID]
             formset = FrameworkFormSet(queryset=Framework.objects.filter(framework_id=framework_id))
         else:
             formset = FrameworkFormSet()
-    return render(request, "edit_framework_themes.html", {"form": formset, "framework_id": framework_id, "all_frameworks": all_frameworks})
+    return render(
+        request,
+        "edit_framework_themes.html",
+        {"form": formset, "framework_id": framework_id, "all_frameworks": all_frameworks},
+    )
 
 
 def show_framework(request: HttpRequest, framework_id: id) -> HttpResponse:
     frameworks = Framework.objects.filter(framework_id=framework_id)
-    return render(request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id})
+    return render(
+        request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id}
+    )
+
+
+def show_all_frameworks(request: HttpRequest) -> HttpResponse:
+    all_frameworks = Framework.objects.all().order_by("framework_id")
+    return render(request, "show_all_frameworks.html", {"all_frameworks": all_frameworks})
 
 
 def run_generate_framework(request: HttpRequest) -> HttpResponse:

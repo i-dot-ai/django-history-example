@@ -2,7 +2,7 @@ import factory
 from faker import Faker
 
 from consult.accounts.models import User
-from consult.consultations.models import Execution, Theme, Framework
+from consult.consultations.models import Execution, Framework, Theme
 
 fake = Faker()
 

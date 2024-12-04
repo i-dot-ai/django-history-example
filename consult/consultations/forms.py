@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Theme, Framework
+from .models import Framework, Theme
 
 
 class ThemeForm(forms.ModelForm):
@@ -15,8 +15,4 @@ class FrameworkForm(forms.ModelForm):
         fields = ["name", "description"]
 
 
-FrameworkFormSet = forms.modelformset_factory(
-    Framework,
-    form=FrameworkForm,
-    extra=3
-)
+FrameworkFormSet = forms.modelformset_factory(Framework, form=FrameworkForm, extra=3)

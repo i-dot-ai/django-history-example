@@ -24,8 +24,11 @@ from consult.consultations.views import (
     create_theme,
     delete_theme,
     edit_theme,
+    edit_themes_for_framework,
     list_themes_for_execution_run,
-    edit_themes_for_framework, show_framework, run_generate_framework
+    run_generate_framework,
+    show_all_frameworks,
+    show_framework,
 )
 
 urlpatterns = [
@@ -41,8 +44,12 @@ urlpatterns = [
     path("delete-theme/<uuid:theme_id>/", delete_theme, name="delete_theme"),
     path("create-theme/<uuid:execution_id>/", create_theme, name="create_theme"),
     path("create-themes-framework/", edit_themes_for_framework, name="create_theme_for_framework"),
-    path("edit-themes-framework/<int:framework_id>/", edit_themes_for_framework, name="edit_theme_for_framework"),
-    # path("frameworks/", show_all_frameworks, name="show_all_frameworks"),
+    path(
+        "edit-themes-framework/<int:framework_id>/",
+        edit_themes_for_framework,
+        name="edit_theme_for_framework",
+    ),
+    path("frameworks/", show_all_frameworks, name="show_all_frameworks"),
     path("framework/<int:framework_id>/", show_framework, name="show_framework"),
     path("generate-framework/", run_generate_framework, name="generate_framework"),
     path("api/", api.urls),
