@@ -1,3 +1,6 @@
+# This generates Users, Executions and Themes for testing purposes
+# - I don't think we're using this model structure any more.
+
 from django.core.management.base import BaseCommand
 
 from consult.consultations.models import Execution

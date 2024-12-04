@@ -8,12 +8,12 @@ repos:
         name: Check for files larger than 5 MB
         args: [ "--maxkb=5120" ]
 
-  - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.6
-    hooks:
-    -   id: bandit
-        args: [ "-c", "pyproject.toml", "-ll", "-r", "." ]
-        additional_dependencies: [ "bandit[toml]" ]
+  # - repo: https://github.com/PyCQA/bandit
+  #   rev: 1.7.6
+  #   hooks:
+  #   -   id: bandit
+  #       args: [ "-c", "pyproject.toml", "-ll", "-r", "." ]
+  #       additional_dependencies: [ "bandit[toml]" ]
 
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.4.0

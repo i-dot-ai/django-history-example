@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Framework</title>
+</head>
+
+<body>
+  <h1>Framework ID: {{ framework_id }}</h1>
+
+  <ul>
+    {% for framework in frameworks %}
+    <li>
+      {{ framework.name }} : {{ framework.description }}
+    </li>
+    {% endfor %}
+  </ul>
+
+</body>
+
+</html>
+
