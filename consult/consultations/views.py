@@ -86,9 +86,10 @@ def edit_themes_for_framework(
             for form in formset:
                 form.instance.pk = None  # Set primary key to None to create new objects
                 print(f"form.instance: {form.instance}")
-                framework = form.save(commit=False)
-                framework.framework_id = next_id
-                framework.save()
+                frameworktheme = form.save(commit=False)
+                frameworktheme.framework_id = next_id
+                frameworktheme.user = request.user
+                frameworktheme.save()
             return redirect(reverse("edit_theme_for_framework", args=(next_id,)))
     else:
         if framework_id:
