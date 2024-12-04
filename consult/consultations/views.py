@@ -6,8 +6,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import FrameworkFormSet, ThemeForm
-from .models import Execution, FrameworkTheme, Theme
-from .pipeline import generate_dummy_framework
+from .models import Execution, FrameworkTheme, Theme, Response
+from .pipeline import generate_dummy_framework, generate_mapping
 
 
 def list_themes_for_execution_run(
@@ -122,6 +122,16 @@ def run_generate_framework(request: HttpRequest) -> HttpResponse:
         framework_id = generate_dummy_framework()
         return redirect(reverse("show_framework", args=(framework_id,)))
     return render(request, "run_generate_framework.html")
+
+
+def run_generate_mapping(request: HttpRequest) -> HttpResponse:
+    framework_ids = FrameworkTheme.objects.values_list("framework_id", flat=True).distinct()
+    if request.method == "POST":
+        responses = Response.objects.all()
+        framework_id = request.POST.get("framework_id")
+        generate_mapping(responses, framework_id)
+        # TODO - what to return
+    return render(request, "run_generate_mapping.html", {"framework_ids": framework_ids})
 
 
 def show_framework_theme(request, framework_theme_id: UUID) -> HttpResponse:
