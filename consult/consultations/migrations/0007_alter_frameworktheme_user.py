@@ -6,16 +6,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('consultations', '0006_historicalresponsemapping_responsemapping'),
+        ("consultations", "0006_historicalresponsemapping_responsemapping"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='frameworktheme',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="frameworktheme",
+            name="user",
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]
