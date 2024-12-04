@@ -74,4 +74,3 @@ class ResponseMapping(UUIDPrimaryKeyModel):
     framework_theme = models.ForeignKey(FrameworkTheme, on_delete=models.CASCADE)
 
     history = HistoricalRecords()
-
