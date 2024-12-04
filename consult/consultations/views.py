@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import FrameworkFormSet, ThemeForm
-from .models import Execution, FrameworkTheme, Theme, Response
+from .models import Execution, FrameworkTheme, Theme, Response, ResponseMapping
 from .pipeline import generate_dummy_framework, generate_mapping
 
 
@@ -150,3 +150,18 @@ def run_generate_mapping(request: HttpRequest) -> HttpResponse:
         generate_mapping(responses, framework_id)
         # TODO - what to return
     return render(request, "run_generate_mapping.html", {"framework_ids": framework_ids})
+
+
+# Response mapping - matching up responses to framework themes
+
+def show_response_mapping(request: HttpRequest, response_mapping_id: UUID) -> HttpResponse:
+    response_mapping = ResponseMapping.objects.get(id=response_mapping_id)
+    response_mapping_history = response_mapping_id.history.all()
+    return render(request, "show_theme_mapping.html", {"response_mapping": response_mapping, "response_mapping_history": response_mapping_history})
+
+
+def show_all_response_mappings(request: HttpRequest) -> HttpResponse:
+    response_mappings = ResponseMapping.objects.all()
+    return render(request, "show_all_response_mappings.html", {"response_mappings": response_mappings})
+
+

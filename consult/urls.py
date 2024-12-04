@@ -30,7 +30,7 @@ from consult.consultations.views import (
     show_all_frameworks,
     show_framework,
     show_framework_theme,
-    run_generate_mapping
+    run_generate_mapping, show_response_mapping, show_all_response_mappings
 )
 
 urlpatterns = [
@@ -60,6 +60,9 @@ urlpatterns = [
     # Run parts of the pipeline
     path("generate-framework/", run_generate_framework, name="generate_framework"),
     path("generate-mapping/", run_generate_mapping, name="generate_mapping"),
+    # Response mappings
+    path("response-mapping/<uuid:response_mapping_id>/", show_response_mapping, name="response_mapping"),
+    path("all-response-mappings/", show_all_response_mappings, name="all_response_mappings"),
     # API
     path("api/", api.urls),
 ]

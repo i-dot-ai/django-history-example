@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Response mapping</title>
+</head>
+
+<body>
+  <h1>Response mapping</h1>
+
+  <a href="{% url 'homepage' %}">Back to homepage</a>
+
+  <p>
+    Response mapping ID: {{ response_mapping.id }}
+    Response: {{ response_mapping.response.response }}
+    Theme: {{ response_mapping.framework_theme.name }}
+  </p>
+
+  <h2>History of theme</h2>
+    {% for history in theme_mapping_history %}
+      <p>
+        {{ history.response.response }} : {{ history.framework_theme.name }}: {{ history.history_date|date:"Y-m-d H:i:s" }}
+        User: {{ history.history_user }}
+      </p>
+    {% endfor %}
+
+</body>
+
+</html>

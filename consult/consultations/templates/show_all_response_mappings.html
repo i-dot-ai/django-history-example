@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All response mappings</title>
+</head>
+
+<body>
+
+  <h1>All response mappings</h1>
+  <ul>
+    {% for mapping in response_mappings %}
+    <li>
+        {{ mapping.id }}: {{ mapping.response.response }} : {{ mapping.framework_theme.name }} : {{ mapping.framework_theme.framework_id}}
+    </li>
+    {% endfor %}
+  </ul>
+
+</body>
+
+</html>
+
