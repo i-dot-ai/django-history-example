@@ -92,7 +92,9 @@ def edit_themes_for_framework(
             return redirect(reverse("edit_theme_for_framework", args=(next_id,)))
     else:
         if framework_id:
-            formset = FrameworkFormSet(queryset=FrameworkTheme.objects.filter(framework_id=framework_id))
+            formset = FrameworkFormSet(
+                queryset=FrameworkTheme.objects.filter(framework_id=framework_id)
+            )
         else:
             formset = FrameworkFormSet()
     return render(
