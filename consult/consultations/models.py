@@ -53,7 +53,7 @@ class FrameworkTheme(UUIDPrimaryKeyModel):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     framework_id = models.IntegerField()  # Is this the right name?
     parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE)
-    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.User", null=True, on_delete=models.CASCADE)
 
     @classmethod
     def get_next_framework_id(cls):
