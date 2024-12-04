@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Generate framework</title>
+</head>
+
+<body>
+  <h1>Generate framework</h1>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Run dummy pipeline</button>
+  </form>
+  <a href="{% url 'homepage' %}">Back to homepage</a>
+
+</body>
+
+</html>

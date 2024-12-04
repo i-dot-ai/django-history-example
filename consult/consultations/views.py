@@ -7,6 +7,7 @@ from django.urls import reverse
 
 from .forms import ThemeForm, FrameworkFormSet, FrameworkForm
 from .models import Execution, Theme, Framework
+from .pipeline import generate_dummy_framework
 
 
 def list_themes_for_execution_run(
@@ -98,3 +99,10 @@ def edit_themes_for_framework(request: HttpRequest, framework_id: Optional[UUID]
 def show_framework(request: HttpRequest, framework_id: id) -> HttpResponse:
     frameworks = Framework.objects.filter(framework_id=framework_id)
     return render(request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id})
+
+
+def run_generate_framework(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        framework_id = generate_dummy_framework()
+        return redirect(reverse("show_framework", args=(framework_id,)))
+    return render(request, "run_generate_framework.html")
