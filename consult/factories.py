@@ -41,3 +41,5 @@ class FrameworkFactory(factory.django.DjangoModelFactory):
     name = factory.LazyAttribute(lambda _: fake.word())
     description = factory.LazyAttribute(lambda _: fake.sentence())
     framework_id = factory.LazyAttribute(lambda _: FrameworkTheme.get_next_framework_id())
+    user = factory.SubFactory(UserFactory)
+    parent = factory.SubFactory("self")
