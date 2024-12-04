@@ -38,7 +38,7 @@ class Theme(UUIDPrimaryKeyModel):
     history = HistoricalRecords()
 
 
-class Framework(UUIDPrimaryKeyModel):
+class FrameworkTheme(UUIDPrimaryKeyModel):
     """A framework_id groups a bunch of themes that will be used for mapping."""
 
     name = models.CharField(max_length=100)

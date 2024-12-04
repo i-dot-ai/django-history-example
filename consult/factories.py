@@ -2,7 +2,7 @@ import factory
 from faker import Faker
 
 from consult.accounts.models import User
-from consult.consultations.models import Execution, Framework, Theme
+from consult.consultations.models import Execution, FrameworkTheme, Theme
 
 fake = Faker()
 
@@ -36,8 +36,8 @@ class ThemeFactory(factory.django.DjangoModelFactory):
 
 class FrameworkFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = Framework
+        model = FrameworkTheme
 
     name = factory.LazyAttribute(lambda _: fake.word())
     description = factory.LazyAttribute(lambda _: fake.sentence())
-    framework_id = factory.LazyAttribute(lambda _: Framework.get_next_framework_id())
+    framework_id = factory.LazyAttribute(lambda _: FrameworkTheme.get_next_framework_id())

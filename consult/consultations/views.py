@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import FrameworkFormSet, ThemeForm
-from .models import Execution, Framework, Theme
+from .models import Execution, FrameworkTheme, Theme
 from .pipeline import generate_dummy_framework
 
 
@@ -77,8 +77,8 @@ def create_theme(request: HttpRequest, execution_id: UUID) -> HttpResponse:
 def edit_themes_for_framework(
     request: HttpRequest, framework_id: Optional[UUID] = None
 ) -> HttpResponse:
-    all_frameworks = Framework.objects.all().order_by("framework_id")
-    next_id = Framework.get_next_framework_id()
+    all_frameworks = FrameworkTheme.objects.all().order_by("framework_id")
+    next_id = FrameworkTheme.get_next_framework_id()
     print(f"next_id: {next_id}")
     if request.method == "POST":
         formset = FrameworkFormSet(request.POST)
@@ -92,7 +92,7 @@ def edit_themes_for_framework(
             return redirect(reverse("edit_theme_for_framework", args=(next_id,)))
     else:
         if framework_id:
-            formset = FrameworkFormSet(queryset=Framework.objects.filter(framework_id=framework_id))
+            formset = FrameworkFormSet(queryset=FrameworkTheme.objects.filter(framework_id=framework_id))
         else:
             formset = FrameworkFormSet()
     return render(
@@ -103,14 +103,14 @@ def edit_themes_for_framework(
 
 
 def show_framework(request: HttpRequest, framework_id: id) -> HttpResponse:
-    frameworks = Framework.objects.filter(framework_id=framework_id)
+    frameworks = FrameworkTheme.objects.filter(framework_id=framework_id)
     return render(
         request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id}
     )
 
 
 def show_all_frameworks(request: HttpRequest) -> HttpResponse:
-    all_frameworks = Framework.objects.all().order_by("framework_id")
+    all_frameworks = FrameworkTheme.objects.all().order_by("framework_id")
     return render(request, "show_all_frameworks.html", {"all_frameworks": all_frameworks})
 
 
