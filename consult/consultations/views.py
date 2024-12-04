@@ -6,11 +6,11 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import FrameworkFormSet, ThemeForm
-from .models import Execution, FrameworkTheme, Theme, Response, ResponseMapping
+from .models import Execution, FrameworkTheme, Response, ResponseMapping, Theme
 from .pipeline import generate_dummy_framework, generate_mapping
 
-
 # Excecution & theme views - now superseded by FrameworkTheme approach
+
 
 def list_themes_for_execution_run(
     request: HttpRequest, execution_id: Optional[UUID] = None
@@ -77,8 +77,9 @@ def create_theme(request: HttpRequest, execution_id: UUID) -> HttpResponse:
 
 
 # FrameworkTheme views
-# Each row of the FrameworkTheme table is a theme belonging to a particular framework.
-# Changes to the theme will be recorded with a new framework_id.
+# Each row of the FrameworkTheme table is a theme belonging to a particular framework.
+# Changes to the theme will be recorded with a new framework_id.
+
 
 def edit_themes_for_framework(
     request: HttpRequest, framework_id: Optional[UUID] = None
@@ -135,6 +136,7 @@ def show_framework_theme(request, framework_theme_id: UUID) -> HttpResponse:
 
 # Pipeline views
 
+
 def run_generate_framework(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         framework_id = generate_dummy_framework()
@@ -154,14 +156,35 @@ def run_generate_mapping(request: HttpRequest) -> HttpResponse:
 
 # Response mapping - matching up responses to framework themes
 
+
 def show_response_mapping(request: HttpRequest, response_mapping_id: UUID) -> HttpResponse:
     response_mapping = ResponseMapping.objects.get(id=response_mapping_id)
     response_mapping_history = response_mapping_id.history.all()
-    return render(request, "show_theme_mapping.html", {"response_mapping": response_mapping, "response_mapping_history": response_mapping_history})
+    return render(
+        request,
+        "show_theme_mapping.html",
+        {
+            "response_mapping": response_mapping,
+            "response_mapping_history": response_mapping_history,
+        },
+    )
 
 
 def show_all_response_mappings(request: HttpRequest) -> HttpResponse:
     response_mappings = ResponseMapping.objects.all()
-    return render(request, "show_all_response_mappings.html", {"response_mappings": response_mappings})
+    return render(
+        request, "show_all_response_mappings.html", {"response_mappings": response_mappings}
+    )
 
 
+# Homepage
+def homepage(request):
+    framework_themes_ids = FrameworkTheme.objects.all().values_list("id", flat=True)
+    framework_ids = FrameworkTheme.objects.all().values_list("framework_id", flat=True)
+    response_mapping_ids = ResponseMapping.objects.all().values_list("id", flat=True)
+    context = {
+        "framework_theme_ids": framework_themes_ids,
+        "framework_ids": framework_ids,
+        "response_mapping_ids": response_mapping_ids,
+    }
+    return render(request, "homepage.html", context=context)

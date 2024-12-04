@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+</head>
+
+<body>
+  <h1>Welcome to the django-simple-history example!</h1>
+
+  <h2>Pipeline: Create framework i.e. generate themes</h2>
+  <p><a href="{% url 'generate_framework' %}">Create framework</a></p>
+
+  <h2>Framework themes</h2>
+  <p><a href="{% url 'show_all_frameworks' %}">All frameworks</a></p>
+  <p><a href="{% url 'create_theme_for_framework' %}">Create frameworks</a></p>
+
+  {% for id in framework_theme_ids %}
+    <p><a href="{% url 'theme-framework' id %}">Show theme for framework: {{ id }}</a></p>
+  {% endfor %}
+
+  {% for id in framework_ids %}
+    <p>
+      <a href="{% url 'edit_theme_for_framework' id %}">Edit themes for framework: {{ id }}</a>
+      <a href="{% url 'show_framework' id %}">Show framework: {{ id }}</a>
+    </p>
+  {% endfor %}
+
+  <h2>Pipeline: Create mapping of responses to themes</h2>
+  <p><a href="{% url 'generate_mapping' %}">Generate mapping</a></p>
+
+  <h2>Response mappings</h2>
+  <p><a href="{% url 'all_response_mappings' %}">All response mappings</a></p>
+  
+  {% for id in response_mapping_ids %}
+    <p>
+      <a href="{% url 'response_mapping' id %}">Response mapping for ID: {{ id }}</a>
+    </p>
+  {% endfor %}
+
+</body>
+
+</html>
