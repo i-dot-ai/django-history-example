@@ -45,8 +45,20 @@ class FrameworkTheme(UUIDPrimaryKeyModel):
     description = models.TextField()
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     framework_id = models.IntegerField()  # Is this the right name?
+    parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+
 
     @classmethod
     def get_next_framework_id(cls):
         last_framework = cls.objects.all().order_by("framework_id").last()
         return last_framework.framework_id + 1 if last_framework else 1
+
+
+    def get_theme_history(self):
+        parents = []
+        current = self
+        while current.parent is not None:
+            parents.append(current.parent)
+            current = current.parent
+        return parents
