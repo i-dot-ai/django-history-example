@@ -5,7 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .forms import FrameworkFormSet, ThemeForm, ResponseMappingForm
+from .forms import FrameworkFormSet, ResponseMappingForm, ThemeForm
 from .models import Execution, FrameworkTheme, Response, ResponseMapping, Theme
 from .pipeline import generate_dummy_framework, generate_mapping
 
@@ -202,5 +202,3 @@ def homepage(request):
         "response_mapping_ids": response_mapping_ids,
     }
     return render(request, "homepage.html", context=context)
-
-

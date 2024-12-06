@@ -22,6 +22,7 @@ from consult.api import api
 from consult.consultations.views import (
     create_theme,
     delete_theme,
+    edit_response_mapping,
     edit_theme,
     edit_themes_for_framework,
     homepage,
@@ -33,7 +34,6 @@ from consult.consultations.views import (
     show_framework,
     show_framework_theme,
     show_response_mapping,
-    edit_response_mapping
 )
 
 urlpatterns = [
