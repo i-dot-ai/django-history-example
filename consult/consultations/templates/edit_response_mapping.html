@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Edit mapping of themes to responses</title>
+</head>
+
+<body>
+  <h1>Edit mapping of themes to responses</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+  <a href="{% url 'homepage' %}">Back to homepage</a>
+
+</body>
+
+</html>

@@ -33,6 +33,7 @@ from consult.consultations.views import (
     show_framework,
     show_framework_theme,
     show_response_mapping,
+    edit_response_mapping
 )
 
 urlpatterns = [
@@ -69,6 +70,11 @@ urlpatterns = [
         name="response_mapping",
     ),
     path("all-response-mappings/", show_all_response_mappings, name="all_response_mappings"),
+    path(
+        "edit-response-mapping/<uuid:response_mapping_id>/",
+        edit_response_mapping,
+        name="edit_response_mapping",
+    ),
     # API
     path("api/", api.urls),
 ]
