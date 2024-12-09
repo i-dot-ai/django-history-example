@@ -21,10 +21,10 @@
     <p><a href="{% url 'theme-framework' id %}">Show theme for framework: {{ id }}</a></p>
   {% endfor %}
 
-  {% for id in framework_ids %}
+  {% for framework_id in framework_ids %}
     <p>
-      <a href="{% url 'edit_theme_for_framework' id %}">Edit themes for framework: {{ id }}</a>
-      <a href="{% url 'show_framework' id %}">Show framework: {{ id }}</a>
+      <a href="{% url 'edit_theme_for_framework' framework_id %}">Edit themes for framework: {{ framework_id }}</a>
+      <a href="{% url 'show_framework' framework_id %}">Show framework: {{ framework_id }}</a>
     </p>
   {% endfor %}
 
@@ -33,10 +33,11 @@
 
   <h2>Response mappings</h2>
   <p><a href="{% url 'all_response_mappings' %}">All response mappings</a></p>
-  
-  {% for id in response_mapping_ids %}
+
+  {% for response_mapping_id in response_mapping_ids %}
     <p>
-      <a href="{% url 'response_mapping' id %}">Response mapping for ID: {{ id }}</a>
+      <a href="{% url 'response_mapping' response_mapping_id %}">Response mapping for ID: {{ response_mapping_id }}</a>
+      <a href="{% url 'edit_response_mapping' response_mapping_id %}">Edit response mapping for ID: {{ response_mapping_id }}</a>
     </p>
   {% endfor %}
 

@@ -5,7 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .forms import FrameworkFormSet, ThemeForm
+from .forms import FrameworkFormSet, ResponseMappingForm, ThemeForm
 from .models import Execution, FrameworkTheme, Response, ResponseMapping, Theme
 from .pipeline import generate_dummy_framework, generate_mapping
 
@@ -112,7 +112,7 @@ def edit_themes_for_framework(
     )
 
 
-def show_framework(request: HttpRequest, framework_id: id) -> HttpResponse:
+def show_framework(request: HttpRequest, framework_id: int) -> HttpResponse:
     frameworks = FrameworkTheme.objects.filter(framework_id=framework_id)
     return render(
         request, "show_framework.html", {"frameworks": frameworks, "framework_id": framework_id}
@@ -159,10 +159,10 @@ def run_generate_mapping(request: HttpRequest) -> HttpResponse:
 
 def show_response_mapping(request: HttpRequest, response_mapping_id: UUID) -> HttpResponse:
     response_mapping = ResponseMapping.objects.get(id=response_mapping_id)
-    response_mapping_history = response_mapping_id.history.all()
+    response_mapping_history = response_mapping.history.all()
     return render(
         request,
-        "show_theme_mapping.html",
+        "show_response_mapping.html",
         {
             "response_mapping": response_mapping,
             "response_mapping_history": response_mapping_history,
@@ -174,6 +174,20 @@ def show_all_response_mappings(request: HttpRequest) -> HttpResponse:
     response_mappings = ResponseMapping.objects.all()
     return render(
         request, "show_all_response_mappings.html", {"response_mappings": response_mappings}
+    )
+
+
+def edit_response_mapping(request: HttpRequest, response_mapping_id: UUID) -> HttpResponse:
+    response_mapping = ResponseMapping.objects.get(id=response_mapping_id)
+    if request.method == "POST":
+        form = ResponseMappingForm(request.POST, instance=response_mapping)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("response_mapping", args=(response_mapping.id,)))
+    else:
+        form = ResponseMappingForm(instance=response_mapping)
+    return render(
+        request, "edit_response_mapping.html", {"form": form, "response_mapping": response_mapping}
     )
 
 

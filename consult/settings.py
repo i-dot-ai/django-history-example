@@ -28,7 +28,7 @@ SECRET_KEY = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []  # noqa
+ALLOWED_HOSTS: list[str] = []  # noqa
 
 
 # Application definition

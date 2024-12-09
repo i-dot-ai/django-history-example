@@ -17,7 +17,7 @@
   </p>
 
   <h2>History of theme</h2>
-    {% for history in theme_mapping_history %}
+    {% for history in response_mapping_history %}
       <p>
         {{ history.response.response }} : {{ history.framework_theme.name }}: {{ history.history_date|date:"Y-m-d H:i:s" }}
         User: {{ history.history_user }}
